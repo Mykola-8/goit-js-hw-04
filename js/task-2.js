@@ -1,16 +1,34 @@
-function isEnoughCapacity(products, containerSize) {
-  let quantityProducts = 0;
-  const arrayProducts = Object.values(products);
-  for (const product of arrayProducts) {
-    quantityProducts += product;
+function calcAverageCalories(days) {
+  let sumCalories = 0;
+  for (const day of days) {
+    sumCalories += day.calories;
   }
-  return Boolean(quantityProducts <= containerSize);
+  const result = days.length > 0 ? sumCalories / days.length : 0;
+  return result;
 }
 
-console.log(isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)); // true
+console.log(
+  calcAverageCalories([
+    { day: "monday", calories: 3010 },
+    { day: "tuesday", calories: 3200 },
+    { day: "wednesday", calories: 3120 },
+    { day: "thursday", calories: 2900 },
+    { day: "friday", calories: 3450 },
+    { day: "saturday", calories: 3280 },
+    { day: "sunday", calories: 3300 },
+  ])
+); // 3180
 
-console.log(isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)); // false
+console.log(
+  calcAverageCalories([
+    { day: "monday", calories: 2040 },
+    { day: "tuesday", calories: 2270 },
+    { day: "wednesday", calories: 2420 },
+    { day: "thursday", calories: 1900 },
+    { day: "friday", calories: 2370 },
+    { day: "saturday", calories: 2280 },
+    { day: "sunday", calories: 2610 },
+  ])
+); // 2270
 
-console.log(isEnoughCapacity({ apples: 1, lime: 5, tomatos: 3 }, 14)); // true
-
-console.log(isEnoughCapacity({ apples: 18, potatos: 5, oranges: 2 }, 7)); // false
+console.log(calcAverageCalories([])); // 0
